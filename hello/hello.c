@@ -1,7 +1,7 @@
 #include "php.h"
 
 static function_entry hello_functions[] = {
-    PHP_FE(hello_world, NULL)
+    PHP_FE(hello, NULL)
     {NULL, NULL, NULL}
 };
 
@@ -18,7 +18,7 @@ zend_module_entry hello_module_entry = {
     STANDARD_MODULE_PROPERTIES
 };
 
-ZEND_FUNCTION(hello_world)
+ZEND_FUNCTION(hello)
 {
     php_printf("Hello, world!\n");
 }
