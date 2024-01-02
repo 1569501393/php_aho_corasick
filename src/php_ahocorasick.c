@@ -536,6 +536,8 @@ static char * php_ahocorasick_mb_strtolower(char * input TSRMLS_DC){
 }
 #endif
 
+
+//TODO 匹配处理器
 /**
  * AhoCorasick callback handler - MATCH_CALBACK_t type
  */
@@ -578,6 +580,18 @@ static int php_ahocorasick_match_handler(AC_MATCH_t * m, void * param)
         add_assoc_long(COMPAT_Z_ARREF(mysubarray), "start_postion", (m->position - COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))));
 
         COMPAT_ADD_ASSOC_ZVAL(mysubarray, "value", curPattern->zVal);
+
+        // TODO 判断前后字符是否为标点符号或者空格，如果不是，则跳过
+
+        // TODO 判断前后字符是否为标点符号或者空格
+        if (m->position > 0 && m->position < COMPAT_Z_STRLEN_PP(z)){
+            zval * prevChar = &COMPAT_Z_STRVAL_PP(z)[m->position - 1];
+            zval * nextChar = &COMPAT_Z_STRVAL_PP(z)[m->position + COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))];
+            if (Z_TYPE_PP(prevChar) == IS_STRING && Z_TYPE_PP(nextChar) == IS_STRING){
+            }
+        }
+
+        
 
         // add to aggregate array
         add_next_index_zval(COMPAT_Z_ARREF(myp->resultArray), COMPAT_Z_ARREF(mysubarray));
