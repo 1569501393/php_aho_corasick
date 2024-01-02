@@ -1,0 +1,73 @@
+     array(5) {
+002+ m=, m=pQêKþ, m=, param=ðQêKþ, param=€UÈ­ç, size=1
+003+ m=0x7ffe4bea5170, param=0x7ffe4bea51f0
+004+ *m=1, *param=
+005+ pos=14, start_postion=9, value=
+006+ m= /u_&V, m=pQêKþ, m=, param=ðQêKþ, param=P\È­ç, size=1
+007+ m=0x7ffe4bea5170, param=0x7ffe4bea51f0
+008+ *m=1, *param=
+009+ pos=19, start_postion=15, value=
+010+ m=€.u_&V, m=pQêKþ, m=, param=ðQêKþ, param=°ZÈ­ç, size=1
+011+ m=0x7ffe4bea5170, param=0x7ffe4bea51f0
+012+ *m=1, *param=
+013+ pos=24, start_postion=19, value=
+014+ m=à/u_&V, m=pQêKþ, m=, param=ðQêKþ, param=àQÈ­ç, size=2
+015+ m=0x7ffe4bea5170, param=0x7ffe4bea51f0
+016+ *m=2, *param=
+017+ pos=28, start_postion=24, value=
+018+ pos=28, start_postion=25, value=
+019+   [0]=>
+       }
+       [1]=>
+020+   array(5) {
+002-   [0]=>
+003-   array(5) {
+004-     ["pos"]=>
+005-     int(14)
+006-     ["key"]=>
+007-     string(2) "ad"
+008-     ["aux"]=>
+009-     array(1) {
+010-       [0]=>
+011-       int(1)
+012-     }
+013-     ["start_postion"]=>
+014-     int(9)
+015-     ["value"]=>
+016-     string(5) "gamma"
+017-   }
+018-   [1]=>
+019-   array(4) {
+         ["pos"]=>
+021-     int(19)
+022-     ["keyIdx"]=>
+023-     int(0)
+022+     int(14)
+023+     ["key"]=>
+024+     string(2) "ad"
+025+     ["aux"]=>
+026+     array(1) {
+027+       [0]=>
+028+       int(1)
+029+     }
+         ["start_postion"]=>
+031+     int(9)
+025-     int(15)
+         ["value"]=>
+033+     string(5) "gamma"
+027-     string(4) "zeta"
+035+   [1]=>
+036+   array(4) {
+037+     ["pos"]=>
+038+     int(19)
+039+     ["keyIdx"]=>
+040+     int(0)
+041+     ["start_postion"]=>
+042+     int(15)
+043+     ["value"]=>
+044+     string(4) "zeta"
+045+   }
+       [2]=>
+       array(4) {
+         ["pos"]=>
+--

@@ -1,0 +1,60 @@
+array(5) {
+  [0]=>
+  array(5) {
+    ["pos"]=>
+    int(14)
+    ["key"]=>
+    string(2) "ad"
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      int(1)
+    }
+    ["start_postion"]=>
+    int(9)
+    ["value"]=>
+    string(5) "gamma"
+  }
+  [1]=>
+  array(4) {
+    ["pos"]=>
+    int(19)
+    ["keyIdx"]=>
+    int(0)
+    ["start_postion"]=>
+    int(15)
+    ["value"]=>
+    string(4) "zeta"
+  }
+  [2]=>
+  array(4) {
+    ["pos"]=>
+    int(24)
+    ["key"]=>
+    string(2) "ag"
+    ["start_postion"]=>
+    int(19)
+    ["value"]=>
+    string(5) "omega"
+  }
+  [3]=>
+  array(4) {
+    ["pos"]=>
+    int(28)
+    ["key"]=>
+    string(2) "ab"
+    ["start_postion"]=>
+    int(24)
+    ["value"]=>
+    string(4) "alfa"
+  }
+  [4]=>
+  array(3) {
+    ["pos"]=>
+    int(28)
+    ["start_postion"]=>
+    int(25)
+    ["value"]=>
+    string(3) "lfa"
+  }
+}

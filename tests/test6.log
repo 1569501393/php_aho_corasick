@@ -1,0 +1,78 @@
+
+---- EXPECTED OUTPUT
+-----
+-----
+-----
+array(1) {
+  [0]=>
+  array(4) {
+    ["pos"]=>
+    int(4)
+    ["key"]=>
+    string(1) "a"
+    ["start_postion"]=>
+    int(0)
+    ["value"]=>
+    string(4) "abcd"
+  }
+}
+
+array(1) {
+  [0]=>
+  array(4) {
+    ["pos"]=>
+    int(5)
+    ["key"]=>
+    string(1) "b"
+    ["start_postion"]=>
+    int(1)
+    ["value"]=>
+    string(4) "ghij"
+  }
+}
+
+array(0) {
+}
+---- ACTUAL OUTPUT
+-----
+m=ðËxùU, m=`ý1þ, m=, param=àý1þ, param= WÈô, size=1
+m=0x7ffe31fd7f60, param=0x7ffe31fd7fe0
+*m=1, *param=
+pos=4, start_postion=0, value=
+-----
+m=ÐÊxùU, m=`ý1þ, m=, param=àý1þ, param=€UÈô, size=1
+m=0x7ffe31fd7f60, param=0x7ffe31fd7fe0
+*m=1, *param=
+pos=5, start_postion=1, value=
+-----
+array(1) {
+  [0]=>
+  array(4) {
+    ["pos"]=>
+    int(4)
+    ["key"]=>
+    string(1) "a"
+    ["start_postion"]=>
+    int(0)
+    ["value"]=>
+    string(4) "abcd"
+  }
+}
+
+array(1) {
+  [0]=>
+  array(4) {
+    ["pos"]=>
+    int(5)
+    ["key"]=>
+    string(1) "b"
+    ["start_postion"]=>
+    int(1)
+    ["value"]=>
+    string(4) "ghij"
+  }
+}
+
+array(0) {
+}
+---- FAILED

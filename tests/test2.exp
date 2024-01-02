@@ -1,0 +1,228 @@
+AhoCorasick match for ahocorasick_match("alFABETA gammadelta delta delta simple pie! aux ssščř+ééžž ččř é é-é éeéee éé aux2 aux3 aux2", c): array(16) {
+  [0]=>
+  array(5) {
+    ["pos"]=>
+    int(14)
+    ["key"]=>
+    string(2) "ad"
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(9)
+    ["value"]=>
+    string(5) "gamma"
+  }
+  [1]=>
+  array(5) {
+    ["pos"]=>
+    int(19)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(14)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [2]=>
+  array(5) {
+    ["pos"]=>
+    int(25)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(20)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [3]=>
+  array(5) {
+    ["pos"]=>
+    int(31)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(26)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [4]=>
+  array(3) {
+    ["pos"]=>
+    int(38)
+    ["start_postion"]=>
+    int(32)
+    ["value"]=>
+    string(6) "simple"
+  }
+  [5]=>
+  array(4) {
+    ["pos"]=>
+    int(42)
+    ["keyIdx"]=>
+    int(42)
+    ["start_postion"]=>
+    int(39)
+    ["value"]=>
+    string(3) "pie"
+  }
+  [6]=>
+  array(4) {
+    ["pos"]=>
+    int(47)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(44)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [7]=>
+  array(3) {
+    ["pos"]=>
+    int(61)
+    ["start_postion"]=>
+    int(50)
+    ["value"]=>
+    string(11) "ščř+éé"
+  }
+  [8]=>
+  array(3) {
+    ["pos"]=>
+    int(61)
+    ["start_postion"]=>
+    int(57)
+    ["value"]=>
+    string(4) "éé"
+  }
+  [9]=>
+  array(3) {
+    ["pos"]=>
+    int(94)
+    ["start_postion"]=>
+    int(90)
+    ["value"]=>
+    string(4) "éé"
+  }
+  [10]=>
+  array(4) {
+    ["pos"]=>
+    int(98)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(95)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [11]=>
+  array(4) {
+    ["pos"]=>
+    int(99)
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(95)
+    ["value"]=>
+    string(4) "aux2"
+  }
+  [12]=>
+  array(4) {
+    ["pos"]=>
+    int(103)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(100)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [13]=>
+  array(4) {
+    ["pos"]=>
+    int(104)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(100)
+    ["value"]=>
+    string(4) "aux3"
+  }
+  [14]=>
+  array(4) {
+    ["pos"]=>
+    int(108)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(105)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [15]=>
+  array(4) {
+    ["pos"]=>
+    int(109)
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(105)
+    ["value"]=>
+    string(4) "aux2"
+  }
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c): array(0) {
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c, false): array(0) {
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c, true): array(0) {
+}
+AhoCorasick isValid(c): bool(true)
+AhoCorasick deinit(c): bool(true)
+AhoCorasick isValid(c): bool(false)
+AhoCorasick deinit(c): bool(false)

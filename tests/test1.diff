@@ -1,0 +1,117 @@
+     array(5) {
+002+ m=`İZ+V, m= ÔÉ>ı, m=, param= ÔÉ>ı, param=, size=1
+003+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+004+ *m=1, *param=
+005+ pos=14, start_postion=9, value=
+006+ m=ÀÚZ+V, m= ÔÉ>ı, m=, param= ÔÉ>ı, param=5ˆ¤•, size=1
+007+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+008+ *m=1, *param=
+009+ pos=19, start_postion=15, value=
+010+ m= ÙZ+V, m= ÔÉ>ı, m=, param= ÔÉ>ı, param=p3ˆ¤•, size=1
+011+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+012+ *m=1, *param=
+013+ pos=24, start_postion=19, value=
+014+ m= ßZ+V, m= ÔÉ>ı, m=, param= ÔÉ>ı, param=@<ˆ¤•, size=2
+015+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+016+ *m=2, *param=
+017+ pos=28, start_postion=24, value=
+018+ pos=28, start_postion=25, value=
+019+   [0]=>
+       }
+       [1]=>
+020+   array(5) {
+002-   [0]=>
+003-   array(5) {
+004-     ["pos"]=>
+005-     int(14)
+006-     ["key"]=>
+007-     string(2) "ad"
+008-     ["aux"]=>
+009-     array(1) {
+010-       [0]=>
+011-       int(1)
+012-     }
+013-     ["start_postion"]=>
+014-     int(9)
+015-     ["value"]=>
+016-     string(5) "gamma"
+017-   }
+018-   [1]=>
+019-   array(4) {
+         ["pos"]=>
+021-     int(19)
+022-     ["keyIdx"]=>
+023-     int(0)
+022+     int(14)
+023+     ["key"]=>
+024+     string(2) "ad"
+025+     ["aux"]=>
+026+     array(1) {
+027+       [0]=>
+028+       int(1)
+029+     }
+         ["start_postion"]=>
+031+     int(9)
+025-     int(15)
+         ["value"]=>
+033+     string(5) "gamma"
+027-     string(4) "zeta"
+035+   [1]=>
+036+   array(4) {
+037+     ["pos"]=>
+038+     int(19)
+039+     ["keyIdx"]=>
+040+     int(0)
+041+     ["start_postion"]=>
+042+     int(15)
+043+     ["value"]=>
+044+     string(4) "zeta"
+045+   }
+       [2]=>
+       array(4) {
+         ["pos"]=>
+--
+       }
+     }
+     array(4) {
+079+ m=ØZ+V, m= ÔÉ>ı, m=, param= ÔÉ>ı, param=8ˆ¤•, size=1
+080+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+081+ *m=1, *param=
+082+ pos=6, start_postion=0, value=
+083+ m=`ßZ+V, m= ÔÉ>ı, m=, param= ÔÉ>ı, param=À5ˆ¤•, size=1
+084+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+085+ *m=1, *param=
+086+ pos=11, start_postion=9, value=
+087+ m= ßZ+V, m= ÔÉ>ı, m=, param= ÔÉ>ı, param=ğ4ˆ¤•, size=1
+088+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+089+ *m=1, *param=
+090+ pos=20, start_postion=14, value=
+091+ m=, m= ÔÉ>ı, m=, param= ÔÉ>ı, param= 2ˆ¤•, size=1
+092+ m=0x7ffd3ec9d420, param=0x7ffd3ec9d4a0
+093+ *m=1, *param=
+094+ pos=29, start_postion=23, value=
+095+   [0]=>
+062-   [0]=>
+063-   array(3) {
+064-     ["pos"]=>
+065-     int(6)
+066-     ["start_postion"]=>
+067-     int(0)
+068-     ["value"]=>
+069-     string(6) "ä½ å¥½"
+070-   }
+071-   [1]=>
+       array(3) {
+098+     int(6)
+099+     ["start_postion"]=>
+100+     int(0)
+101+     ["value"]=>
+102+     string(6) "ä½ å¥½"
+103+   }
+104+   [1]=>
+105+   array(3) {
+106+     ["pos"]=>
+         int(11)
+         ["start_postion"]=>
+         int(9)
+--

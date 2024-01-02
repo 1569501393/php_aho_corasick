@@ -1,0 +1,244 @@
+001+ AhoCorasick match for ahocorasick_match("alFABETA gammadelta delta delta simple pie! aux ssΕ΅ΔΕ™+Γ©Γ©ΕΎΕΎ ΔΔΕ™ Γ© Γ©-Γ© Γ©eΓ©ee Γ©Γ© aux2 aux3 aux2", c): m=πΕ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=p„h“, size=1
+002+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+003+ *m=1, *param=
+004+ pos=14, start_postion=9, value=
+005+ m=pΓ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=p‚h“, size=1
+006+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+007+ *m=1, *param=
+008+ pos=19, start_postion=14, value=
+009+ m=pΓ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=p‚h“, size=1
+010+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+011+ *m=1, *param=
+012+ pos=25, start_postion=20, value=
+013+ m=pΓ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=p‚h“, size=1
+014+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+015+ *m=1, *param=
+016+ pos=31, start_postion=26, value=
+017+ m=π½5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=pzh“, size=1
+018+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+019+ *m=1, *param=
+020+ pos=38, start_postion=32, value=
+021+ m=ΠΎ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param= {h“, size=1
+022+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+023+ *m=1, *param=
+024+ pos=42, start_postion=39, value=
+025+ m=pΌ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param= xh“, size=1
+026+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+027+ *m=1, *param=
+028+ pos=47, start_postion=44, value=
+029+ m=Θ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=vh“, size=2
+030+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+031+ *m=2, *param=
+032+ pos=61, start_postion=50, value=
+033+ pos=61, start_postion=57, value=
+034+ m=Έ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=ΰqh“, size=1
+035+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+036+ *m=1, *param=
+037+ pos=94, start_postion=90, value=
+038+ m=pΌ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param= xh“, size=1
+039+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+040+ *m=1, *param=
+041+ pos=98, start_postion=95, value=
+042+ m=0Ό5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=xh“, size=1
+043+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+044+ *m=1, *param=
+045+ pos=99, start_postion=95, value=
+046+ m=pΌ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param= xh“, size=1
+047+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+048+ *m=1, *param=
+049+ pos=103, start_postion=100, value=
+050+ m=π»5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param= wh“, size=1
+051+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+052+ *m=1, *param=
+053+ pos=104, start_postion=100, value=
+054+ m=pΌ5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param= xh“, size=1
+055+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+056+ *m=1, *param=
+057+ pos=108, start_postion=105, value=
+058+ m=0Ό5τιU, m=γ›‹ώ, m=, param=δ›‹ώ, param=xh“, size=1
+059+ m=0x7ffe8b9be390, param=0x7ffe8b9be410
+060+ *m=1, *param=
+061+ pos=109, start_postion=105, value=
+062+ array(16) {
+063+   [0]=>
+064+   array(5) {
+001- AhoCorasick match for ahocorasick_match("alFABETA gammadelta delta delta simple pie! aux ssΕ΅ΔΕ™+Γ©Γ©ΕΎΕΎ ΔΔΕ™ Γ© Γ©-Γ© Γ©eΓ©ee Γ©Γ© aux2 aux3 aux2", c): array(16) {
+002-   [0]=>
+003-   array(5) {
+004-     ["pos"]=>
+005-     int(14)
+006-     ["key"]=>
+007-     string(2) "ad"
+008-     ["aux"]=>
+009-     int(66)
+010-     ["start_postion"]=>
+011-     int(9)
+012-     ["value"]=>
+013-     string(5) "gamma"
+014-   }
+015-   [1]=>
+016-   array(5) {
+017-     ["pos"]=>
+018-     int(19)
+019-     ["key"]=>
+020-     string(2) "ae"
+021-     ["aux"]=>
+022-     string(10) "simple-aux"
+023-     ["start_postion"]=>
+024-     int(14)
+025-     ["value"]=>
+026-     string(5) "delta"
+027-   }
+028-   [2]=>
+029-   array(5) {
+030-     ["pos"]=>
+031-     int(25)
+032-     ["key"]=>
+033-     string(2) "ae"
+034-     ["aux"]=>
+035-     string(10) "simple-aux"
+036-     ["start_postion"]=>
+037-     int(20)
+038-     ["value"]=>
+039-     string(5) "delta"
+040-   }
+041-   [3]=>
+042-   array(5) {
+043-     ["pos"]=>
+044-     int(31)
+045-     ["key"]=>
+046-     string(2) "ae"
+047-     ["aux"]=>
+048-     string(10) "simple-aux"
+049-     ["start_postion"]=>
+050-     int(26)
+051-     ["value"]=>
+052-     string(5) "delta"
+053-   }
+054-   [4]=>
+055-   array(3) {
+         ["pos"]=>
+066+     int(14)
+067+     ["key"]=>
+068+     string(2) "ad"
+069+     ["aux"]=>
+070+     int(66)
+057-     int(38)
+         ["start_postion"]=>
+072+     int(9)
+059-     int(32)
+         ["value"]=>
+074+     string(5) "gamma"
+061-     string(6) "simple"
+076+   [1]=>
+       [5]=>
+077+   array(5) {
+063-   [5]=>
+064-   array(4) {
+         ["pos"]=>
+079+     int(19)
+080+     ["key"]=>
+081+     string(2) "ae"
+082+     ["aux"]=>
+083+     string(10) "simple-aux"
+084+     ["start_postion"]=>
+         ["keyIdx"]=>
+085+     int(14)
+086+     ["value"]=>
+087+     string(5) "delta"
+088+   }
+089+   [2]=>
+090+   array(5) {
+091+     ["pos"]=>
+092+     int(25)
+093+     ["key"]=>
+094+     string(2) "ae"
+095+     ["aux"]=>
+096+     string(10) "simple-aux"
+066-     int(42)
+067-     ["keyIdx"]=>
+068-     int(42)
+         ["start_postion"]=>
+098+     int(20)
+070-     int(39)
+         ["value"]=>
+100+     string(5) "delta"
+072-     string(3) "pie"
+102+   [3]=>
+       [6]=>
+103+   array(5) {
+074-   [6]=>
+075-   array(4) {
+105+     int(31)
+106+     ["key"]=>
+107+     string(2) "ae"
+077-     int(47)
+         ["aux"]=>
+109+     string(10) "simple-aux"
+110+     ["start_postion"]=>
+111+     int(26)
+112+     ["value"]=>
+113+     string(5) "delta"
+114+   }
+115+   [4]=>
+116+   array(3) {
+117+     ["pos"]=>
+118+     int(38)
+119+     ["start_postion"]=>
+           }
+120+     int(32)
+121+     ["value"]=>
+122+     string(6) "simple"
+123+   }
+124+   [5]=>
+125+   array(4) {
+126+     ["pos"]=>
+127+     int(42)
+128+     ["keyIdx"]=>
+129+     int(42)
+079-     array(1) {
+080-       [0]=>
+081-       array(2) {
+082-         [0]=>
+083-         string(14) "helloAuxObject"
+084-         [1]=>
+085-         int(41)
+086-       }
+087-     }
+         ["start_postion"]=>
+131+     int(39)
+089-     int(44)
+         ["value"]=>
+133+     string(3) "pie"
+091-     string(3) "aux"
+135+   [6]=>
+       [7]=>
+136+   array(4) {
+093-   [7]=>
+094-   array(3) {
+         ["pos"]=>
+138+     int(47)
+139+     ["aux"]=>
+140+     array(1) {
+141+       [0]=>
+142+       array(2) {
+143+         [0]=>
+144+         string(14) "helloAuxObject"
+145+         [1]=>
+146+         int(41)
+147+       }
+148+     }
+096-     int(61)
+150+     int(44)
+151+     ["value"]=>
+152+     string(3) "aux"
+153+   }
+154+   [7]=>
+155+   array(3) {
+156+     ["pos"]=>
+157+     int(61)
+158+     ["start_postion"]=>
+         int(50)
+         ["value"]=>
+         string(11) "Ε΅ΔΕ™+Γ©Γ©"
+--

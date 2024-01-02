@@ -220,7 +220,11 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
             match.position = position + thiz->base_position;
             match.size = current->matched_size;
             match.patterns = current->matched;
-            
+
+            // TODO
+            /*
+            callback(&match, user) 将匹配关键词添加到数组  COMPAT_Z_ARREF(mysubarray)
+            */
             /* Do call-back */
             if (callback(&match, user))
             {

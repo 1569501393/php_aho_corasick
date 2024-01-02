@@ -554,12 +554,37 @@ static int php_ahocorasick_match_handler(AC_MATCH_t * m, void * param)
         return 0;
     }
 
+//    sprintf
+//    (myp->resultArray->val, "%s%s", myp->resultArray->val, m->patterns[j].key
+//    );
+
+    // PIxU-1
+//    printf("m=%s, m=%s, m=%s, param=%s, param=%s, size=%d\n", m, &m, *m, param, &param, *param, m->size);
+//    printf("m=%s, m=%s, m=%s, param=%s, param=%s, size=%d\n", m, &m, *m, param, &param, *param, m->size);
+
+    printf("m=%s, m=%s, m=%s, param=%s, param=%s, size=%d\n", m, &m, *m, param, &param, &param, m->size);
+
+
+    printf("m=%p, param=%p\n", (void *)m, param);
+    printf("*m=%ld, *param=%s\n", m->size, (char *)param);
+
     for (j = 0; j < m->size; j++) {
         // dump found matches to result array
         ahocorasick_pattern_t * curPattern = (ahocorasick_pattern_t *) m->patterns[j].aux;
         if (curPattern == NULL){
           continue;
         }
+
+        // TODO 判断前后字符是否为标点符号或者空格，如果不是，则跳过
+        printf("pos=%ld, start_postion=%ld, value=%s\n", m->position, (m->position - COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))), curPattern->zVal);
+
+        // TODO 判断前后字符是否为标点符号或者空格
+//        if (m->position > 0 && m->position < COMPAT_Z_STRLEN_PP(z)){
+//            zval * prevChar = &COMPAT_Z_STRVAL_PP(z)[m->position - 1];
+//            zval * nextChar = &COMPAT_Z_STRVAL_PP(z)[m->position + COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))];
+//            if (Z_TYPE_PP(prevChar) == IS_STRING && Z_TYPE_PP(nextChar) == IS_STRING){
+//            }
+//        }
 
         COMPAT_ALLOC_INIT_ZVAL(mysubarray);
         array_init(COMPAT_Z_ARREF(mysubarray));
@@ -578,21 +603,11 @@ static int php_ahocorasick_match_handler(AC_MATCH_t * m, void * param)
         }
 
         add_assoc_long(COMPAT_Z_ARREF(mysubarray), "start_postion", (m->position - COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))));
+        add_assoc_long(COMPAT_Z_ARREF(mysubarray), "start_position", (m->position - COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))));
 
         COMPAT_ADD_ASSOC_ZVAL(mysubarray, "value", curPattern->zVal);
 
-        // TODO 判断前后字符是否为标点符号或者空格，如果不是，则跳过
-
-        // TODO 判断前后字符是否为标点符号或者空格
-        if (m->position > 0 && m->position < COMPAT_Z_STRLEN_PP(z)){
-            zval * prevChar = &COMPAT_Z_STRVAL_PP(z)[m->position - 1];
-            zval * nextChar = &COMPAT_Z_STRVAL_PP(z)[m->position + COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))];
-            if (Z_TYPE_PP(prevChar) == IS_STRING && Z_TYPE_PP(nextChar) == IS_STRING){
-            }
-        }
-
-        
-
+        // TODO 添加到聚合数组
         // add to aggregate array
         add_next_index_zval(COMPAT_Z_ARREF(myp->resultArray), COMPAT_Z_ARREF(mysubarray));
     }
@@ -656,7 +671,7 @@ PHP_FUNCTION(ahocorasick_isValid)
     if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "z", &zval_aho_master) == FAILURE) {
         RETURN_NULL();
     }
-    
+
     // fetch resource passed as parameter
     ahoMaster = (ahocorasick_master_t*) zend_fetch_resource(&zval_aho_master TSRMLS_CC, -1, NULL, NULL, 1, le_ahocorasick_master);
 #endif
@@ -721,7 +736,7 @@ PHP_FUNCTION(ahocorasick_match)
     php_ahocorasick_finalize(ahoMaster);
 
     normal = COMPAT_Z_STRVAL_P(uservar);
-    
+
     // prints to stdout
     // PHPWRITE(ZSTR_VAL(uservar), ZSTR_LEN(uservar));
 
@@ -751,11 +766,18 @@ PHP_FUNCTION(ahocorasick_match)
 #else
     my_param.resultArray = return_value;
 #endif
-    
+
     // find all defined
     my_param.retVal = findAll ? 0:1;
 
     //*** 7. Do search
+//    printf("TODO Searching...tmp_text=%s, ahoMaster=%s \n", tmp_text, tmp_text);
+
+    // 将结构体成员转换为 char *
+    char *text_str = "";  // 假设这里是将 tmp_text 转换为字符串的代码
+//    char *my_param = "";  // 假设这里是将 tmp_text 转换为字符串的代码
+    // TODO Searching...tmp_text=Apple, I like Apples and Bananas
+    printf("TODO Searching...tmp_text=%s \n", tmp_text);
     ac_trie_search(ahoMaster->acap, &tmp_text, 0, php_ahocorasick_match_handler, (void *)(&my_param));
 }
 
@@ -846,7 +868,7 @@ PHP_FUNCTION(ahocorasick_init)
     ZEND_REGISTER_RESOURCE(return_value, ahomaster, le_ahocorasick_master);
 #endif
     // ahocorasick_pattern_t build OK.
-    // Keep in mind that we are not freeing strings allocated in memory, it is 
+    // Keep in mind that we are not freeing strings allocated in memory, it is
     // still used internally in aho structure, this free is postponed to releasing
     // aho structure.
 }

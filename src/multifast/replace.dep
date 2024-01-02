@@ -1,0 +1,6 @@
+src/multifast/replace.lo: \
+ /home/jieqiang/lfdev/wwwroot/test/php_aho_corasick2/src/multifast/replace.c \
+ /home/jieqiang/lfdev/wwwroot/test/php_aho_corasick2/src/multifast/node.h \
+ /home/jieqiang/lfdev/wwwroot/test/php_aho_corasick2/src/multifast/actypes.h \
+ /home/jieqiang/lfdev/wwwroot/test/php_aho_corasick2/src/multifast/ahocorasick.h \
+ /home/jieqiang/lfdev/wwwroot/test/php_aho_corasick2/src/multifast/replace.h

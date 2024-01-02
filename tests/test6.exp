@@ -1,0 +1,33 @@
+-----
+-----
+-----
+array(1) {
+  [0]=>
+  array(4) {
+    ["pos"]=>
+    int(4)
+    ["key"]=>
+    string(1) "a"
+    ["start_postion"]=>
+    int(0)
+    ["value"]=>
+    string(4) "abcd"
+  }
+}
+
+array(1) {
+  [0]=>
+  array(4) {
+    ["pos"]=>
+    int(5)
+    ["key"]=>
+    string(1) "b"
+    ["start_postion"]=>
+    int(1)
+    ["value"]=>
+    string(4) "ghij"
+  }
+}
+
+array(0) {
+}

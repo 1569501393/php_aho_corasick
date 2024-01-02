@@ -1,0 +1,521 @@
+
+---- EXPECTED OUTPUT
+AhoCorasick match for ahocorasick_match("alFABETA gammadelta delta delta simple pie! aux ssÅ¡ÄÅ™+Ã©Ã©Å¾Å¾ ÄÄÅ™ Ã© Ã©-Ã© Ã©eÃ©ee Ã©Ã© aux2 aux3 aux2", c): array(16) {
+  [0]=>
+  array(5) {
+    ["pos"]=>
+    int(14)
+    ["key"]=>
+    string(2) "ad"
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(9)
+    ["value"]=>
+    string(5) "gamma"
+  }
+  [1]=>
+  array(5) {
+    ["pos"]=>
+    int(19)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(14)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [2]=>
+  array(5) {
+    ["pos"]=>
+    int(25)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(20)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [3]=>
+  array(5) {
+    ["pos"]=>
+    int(31)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(26)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [4]=>
+  array(3) {
+    ["pos"]=>
+    int(38)
+    ["start_postion"]=>
+    int(32)
+    ["value"]=>
+    string(6) "simple"
+  }
+  [5]=>
+  array(4) {
+    ["pos"]=>
+    int(42)
+    ["keyIdx"]=>
+    int(42)
+    ["start_postion"]=>
+    int(39)
+    ["value"]=>
+    string(3) "pie"
+  }
+  [6]=>
+  array(4) {
+    ["pos"]=>
+    int(47)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(44)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [7]=>
+  array(3) {
+    ["pos"]=>
+    int(61)
+    ["start_postion"]=>
+    int(50)
+    ["value"]=>
+    string(11) "Å¡ÄÅ™+Ã©Ã©"
+  }
+  [8]=>
+  array(3) {
+    ["pos"]=>
+    int(61)
+    ["start_postion"]=>
+    int(57)
+    ["value"]=>
+    string(4) "Ã©Ã©"
+  }
+  [9]=>
+  array(3) {
+    ["pos"]=>
+    int(94)
+    ["start_postion"]=>
+    int(90)
+    ["value"]=>
+    string(4) "Ã©Ã©"
+  }
+  [10]=>
+  array(4) {
+    ["pos"]=>
+    int(98)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(95)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [11]=>
+  array(4) {
+    ["pos"]=>
+    int(99)
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(95)
+    ["value"]=>
+    string(4) "aux2"
+  }
+  [12]=>
+  array(4) {
+    ["pos"]=>
+    int(103)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(100)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [13]=>
+  array(4) {
+    ["pos"]=>
+    int(104)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(100)
+    ["value"]=>
+    string(4) "aux3"
+  }
+  [14]=>
+  array(4) {
+    ["pos"]=>
+    int(108)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(105)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [15]=>
+  array(4) {
+    ["pos"]=>
+    int(109)
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(105)
+    ["value"]=>
+    string(4) "aux2"
+  }
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c): array(0) {
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c, false): array(0) {
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c, true): array(0) {
+}
+AhoCorasick isValid(c): bool(true)
+AhoCorasick deinit(c): bool(true)
+AhoCorasick isValid(c): bool(false)
+AhoCorasick deinit(c): bool(false)
+---- ACTUAL OUTPUT
+AhoCorasick match for ahocorasick_match("alFABETA gammadelta delta delta simple pie! aux ssÅ¡ÄÅ™+Ã©Ã©Å¾Å¾ ÄÄÅ™ Ã© Ã©-Ã© Ã©eÃ©ee Ã©Ã© aux2 aux3 aux2", c): m=ðÅ5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=p„h“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=14, start_postion=9, value=
+m=pÃ5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=p‚h“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=19, start_postion=14, value=
+m=pÃ5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=p‚h“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=25, start_postion=20, value=
+m=pÃ5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=p‚h“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=31, start_postion=26, value=
+m=ð½5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=pzh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=38, start_postion=32, value=
+m=Ð¾5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param= {h“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=42, start_postion=39, value=
+m=p¼5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param= xh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=47, start_postion=44, value=
+m=È5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=vh“, size=2
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=2, *param=
+pos=61, start_postion=50, value=
+pos=61, start_postion=57, value=
+m=¸5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=àqh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=94, start_postion=90, value=
+m=p¼5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param= xh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=98, start_postion=95, value=
+m=0¼5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=xh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=99, start_postion=95, value=
+m=p¼5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param= xh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=103, start_postion=100, value=
+m=ð»5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param= wh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=104, start_postion=100, value=
+m=p¼5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param= xh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=108, start_postion=105, value=
+m=0¼5ôéU, m=ã›‹þ, m=, param=ä›‹þ, param=xh“, size=1
+m=0x7ffe8b9be390, param=0x7ffe8b9be410
+*m=1, *param=
+pos=109, start_postion=105, value=
+array(16) {
+  [0]=>
+  array(5) {
+    ["pos"]=>
+    int(14)
+    ["key"]=>
+    string(2) "ad"
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(9)
+    ["value"]=>
+    string(5) "gamma"
+  }
+  [1]=>
+  array(5) {
+    ["pos"]=>
+    int(19)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(14)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [2]=>
+  array(5) {
+    ["pos"]=>
+    int(25)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(20)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [3]=>
+  array(5) {
+    ["pos"]=>
+    int(31)
+    ["key"]=>
+    string(2) "ae"
+    ["aux"]=>
+    string(10) "simple-aux"
+    ["start_postion"]=>
+    int(26)
+    ["value"]=>
+    string(5) "delta"
+  }
+  [4]=>
+  array(3) {
+    ["pos"]=>
+    int(38)
+    ["start_postion"]=>
+    int(32)
+    ["value"]=>
+    string(6) "simple"
+  }
+  [5]=>
+  array(4) {
+    ["pos"]=>
+    int(42)
+    ["keyIdx"]=>
+    int(42)
+    ["start_postion"]=>
+    int(39)
+    ["value"]=>
+    string(3) "pie"
+  }
+  [6]=>
+  array(4) {
+    ["pos"]=>
+    int(47)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(44)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [7]=>
+  array(3) {
+    ["pos"]=>
+    int(61)
+    ["start_postion"]=>
+    int(50)
+    ["value"]=>
+    string(11) "Å¡ÄÅ™+Ã©Ã©"
+  }
+  [8]=>
+  array(3) {
+    ["pos"]=>
+    int(61)
+    ["start_postion"]=>
+    int(57)
+    ["value"]=>
+    string(4) "Ã©Ã©"
+  }
+  [9]=>
+  array(3) {
+    ["pos"]=>
+    int(94)
+    ["start_postion"]=>
+    int(90)
+    ["value"]=>
+    string(4) "Ã©Ã©"
+  }
+  [10]=>
+  array(4) {
+    ["pos"]=>
+    int(98)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(95)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [11]=>
+  array(4) {
+    ["pos"]=>
+    int(99)
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(95)
+    ["value"]=>
+    string(4) "aux2"
+  }
+  [12]=>
+  array(4) {
+    ["pos"]=>
+    int(103)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(100)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [13]=>
+  array(4) {
+    ["pos"]=>
+    int(104)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(100)
+    ["value"]=>
+    string(4) "aux3"
+  }
+  [14]=>
+  array(4) {
+    ["pos"]=>
+    int(108)
+    ["aux"]=>
+    array(1) {
+      [0]=>
+      array(2) {
+        [0]=>
+        string(14) "helloAuxObject"
+        [1]=>
+        int(41)
+      }
+    }
+    ["start_postion"]=>
+    int(105)
+    ["value"]=>
+    string(3) "aux"
+  }
+  [15]=>
+  array(4) {
+    ["pos"]=>
+    int(109)
+    ["aux"]=>
+    int(66)
+    ["start_postion"]=>
+    int(105)
+    ["value"]=>
+    string(4) "aux2"
+  }
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c): array(0) {
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c, false): array(0) {
+}
+AhoCorasick match for ahocorasick_match("alFABETAABECEDAAAA!", c, true): array(0) {
+}
+AhoCorasick isValid(c): bool(true)
+AhoCorasick deinit(c): bool(true)
+AhoCorasick isValid(c): bool(false)
+AhoCorasick deinit(c): bool(false)
+---- FAILED
