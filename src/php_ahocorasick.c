@@ -643,16 +643,14 @@ static int php_ahocorasick_match_handler(AC_MATCH_t *m, void *param) {
     return myp->retVal == 0 ? 0 : 1;
 }
 
-PHP_RINIT_FUNCTION(ahocorasick)
-        {
-                return SUCCESS;
-        }
+PHP_RINIT_FUNCTION(ahocorasick) {
+        return SUCCESS;
+}
 
-PHP_MINIT_FUNCTION(ahocorasick)
-        {
-                // destruction of ahocorasick_pattern_t master
-                le_ahocorasick_master = zend_register_list_destructors_ex(php_ahocorasick_pattern_t_master_dtor, NULL,
-                                                                          PHP_AHOSTRUCT_MASTER_RES_NAME, module_number);
+PHP_MINIT_FUNCTION(ahocorasick) {
+        // destruction of ahocorasick_pattern_t master
+        le_ahocorasick_master = zend_register_list_destructors_ex(php_ahocorasick_pattern_t_master_dtor, NULL,
+                                                                  PHP_AHOSTRUCT_MASTER_RES_NAME, module_number);
 
 #if PHP7
         zend_class_entry ce;
@@ -663,22 +661,20 @@ PHP_MINIT_FUNCTION(ahocorasick)
         //ZEND_INIT_MODULE_GLOBALS(ahocorasick, php_ahocorasick_init_globals, NULL);
         //REGISTER_INI_ENTRIES();
         return SUCCESS;
-        }
+}
 
-PHP_MSHUTDOWN_FUNCTION(ahocorasick)
-        {
-                //UNREGISTER_INI_ENTRIES();
-                return SUCCESS;
-        }
+PHP_MSHUTDOWN_FUNCTION(ahocorasick) {
+        //UNREGISTER_INI_ENTRIES();
+        return SUCCESS;
+}
 
 /**
  * Returns whether current AhoCorasick resource is valid
  * @param 
  * @return 
  */
-PHP_FUNCTION(ahocorasick_isValid)
-        {
-                ahocorasick_master_t * ahoMaster = NULL;
+PHP_FUNCTION(ahocorasick_isValid) {
+        ahocorasick_master_t * ahoMaster = NULL;
 
 #if PHP7
         zval *zid;
@@ -708,7 +704,7 @@ PHP_FUNCTION(ahocorasick_isValid)
         } else {
             RETURN_TRUE;
         }
-        }
+}
 
 /**
  * Basic strtolower matcher.
@@ -717,107 +713,106 @@ PHP_FUNCTION(ahocorasick_isValid)
  * @param 
  * @return 
  */
-PHP_FUNCTION(ahocorasick_match)
-        {
+PHP_FUNCTION(ahocorasick_match) {
 #ifdef AHOCORASICK_USE_LOWER
-                char *lowered;
+        char *lowered;
 #endif
-                char *normal;
+        char *normal;
 //    TODO 匹配所有关键词
-                zend_bool findAll = 1;
+        zend_bool findAll = 1;
 //    zend_bool findAll = 0;
-                ahocorasick_master_t * ahoMaster = NULL;
-                AC_TEXT_t tmp_text;
+        ahocorasick_master_t * ahoMaster = NULL;
+        AC_TEXT_t tmp_text;
 
 #if PHP7
-                zend_string *uservar;
-                zval       *zid;
-                ZEND_PARSE_PARAMETERS_START(2, 3)
-                Z_PARAM_STR(uservar)
-                Z_PARAM_RESOURCE(zid)
-                Z_PARAM_OPTIONAL
-                Z_PARAM_BOOL(findAll)
-                ZEND_PARSE_PARAMETERS_END();
-                // fetch resource passed as parameter
-                ahoMaster = (ahocorasick_master_t*) zend_fetch_resource(Z_RES_P(zid), PHP_AHOSTRUCT_MASTER_RES_NAME, le_ahocorasick_master);
+        zend_string *uservar;
+        zval       *zid;
+        ZEND_PARSE_PARAMETERS_START(2, 3)
+        Z_PARAM_STR(uservar)
+        Z_PARAM_RESOURCE(zid)
+        Z_PARAM_OPTIONAL
+        Z_PARAM_BOOL(findAll)
+        ZEND_PARSE_PARAMETERS_END();
+        // fetch resource passed as parameter
+        ahoMaster = (ahocorasick_master_t*) zend_fetch_resource(Z_RES_P(zid), PHP_AHOSTRUCT_MASTER_RES_NAME, le_ahocorasick_master);
 #else
-                zval *uservar=NULL;
-                zval *zval_aho_master = NULL;
-                if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz|b", &uservar, &zval_aho_master, &findAll) == FAILURE) {
-                    RETURN_NULL();
-                }
+        zval *uservar=NULL;
+        zval *zval_aho_master = NULL;
+        if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz|b", &uservar, &zval_aho_master, &findAll) == FAILURE) {
+            RETURN_NULL();
+        }
 
-                // fetch resource passed as parameter
-                ahoMaster = (ahocorasick_master_t*) zend_fetch_resource(&zval_aho_master TSRMLS_CC, -1, NULL, NULL, 1, le_ahocorasick_master);
+        // fetch resource passed as parameter
+        ahoMaster = (ahocorasick_master_t*) zend_fetch_resource(&zval_aho_master TSRMLS_CC, -1, NULL, NULL, 1, le_ahocorasick_master);
 #endif
 
-                if (ahoMaster==NULL){
-                    php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid resource.");
-                    RETURN_FALSE;
-                }
+        if (ahoMaster==NULL){
+            php_error_docref(NULL TSRMLS_CC, E_WARNING, "Invalid resource.");
+            RETURN_FALSE;
+        }
 
-                if (ahoMaster->init_ok != 1){
-                    php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not initialized.");
-                    RETURN_FALSE;
-                }
+        if (ahoMaster->init_ok != 1){
+            php_error_docref(NULL TSRMLS_CC, E_WARNING, "Not initialized.");
+            RETURN_FALSE;
+        }
 
-                // finalize trie if not finalized already
-                php_ahocorasick_finalize(ahoMaster);
+        // finalize trie if not finalized already
+        php_ahocorasick_finalize(ahoMaster);
 
-                normal = COMPAT_Z_STRVAL_P(uservar);
+        normal = COMPAT_Z_STRVAL_P(uservar);
 
-                // prints to stdout
-                // PHPWRITE(ZSTR_VAL(uservar), ZSTR_LEN(uservar));
+        // prints to stdout
+        // PHPWRITE(ZSTR_VAL(uservar), ZSTR_LEN(uservar));
 
 #ifdef AHOCORASICK_USE_LOWER
-                // at first, obtain also lower case variant
-                // strtolower is disabled now, exact match is required
+        // at first, obtain also lower case variant
+        // strtolower is disabled now, exact match is required
 #if PHP7
-                lowered = php_ahocorasick_mb_strtolower(Z_STR_P(uservar) TSRMLS_CC);
+        lowered = php_ahocorasick_mb_strtolower(Z_STR_P(uservar) TSRMLS_CC);
 #else
-                lowered = php_ahocorasick_mb_strtolower(Z_STRVAL_P(uservar) TSRMLS_CC);
+        lowered = php_ahocorasick_mb_strtolower(Z_STRVAL_P(uservar) TSRMLS_CC);
 #endif
-                tmp_text.astring = lowered;
+        tmp_text.astring = lowered;
 #else
-                //*** 6. Set input text
-                tmp_text.astring = normal;
+        //*** 6. Set input text
+        tmp_text.astring = normal;
 #endif
-                tmp_text.length = COMPAT_Z_STRLEN_P(uservar);
+        tmp_text.length = COMPAT_Z_STRLEN_P(uservar);
 
-                /* Sending parameter to call-back function */
-                // initialize return array
-                array_init(return_value);
-                struct ahocorasick_callback_payload_t my_param;
-                my_param.retVal = 0;
+        /* Sending parameter to call-back function */
+        // initialize return array
+        array_init(return_value);
+        struct ahocorasick_callback_payload_t my_param;
+        my_param.retVal = 0;
 
 #if PHP7
-                my_param.resultArray = *return_value;
+        my_param.resultArray = *return_value;
 #else
-                my_param.resultArray = return_value;
+        my_param.resultArray = return_value;
 #endif
 
-                // find all defined
-                my_param.retVal = findAll ? 0:1;
+        // find all defined
+        my_param.retVal = findAll ? 0:1;
 
-                //*** 7. Do search
+        //*** 7. Do search
 //    printf("TODO Searching...tmp_text=%s, ahoMaster=%s \n", tmp_text, tmp_text);
 
-                // 将结构体成员转换为 char *
+        // 将结构体成员转换为 char *
 //                char *text_str = "";  // 假设这里是将 tmp_text 转换为字符串的代码
 //    char *my_param = "";  // 假设这里是将 tmp_text 转换为字符串的代码
-                // TODO Searching...tmp_text=Apple, I like Apples and Bananas
-                 printf("TODO Searching...tmp_text=%s \n", tmp_text.astring);
+        // TODO Searching...tmp_text=Apple, I like Apples and Bananas
+        printf("TODO Searching...tmp_text=%s \n", tmp_text.astring);
 //                printf("TODO Searching...tmp_text=%s \n", tmp_text);
 
-                printf("ahoMaster->acap: %p\n", ahoMaster->acap);
-                // printf("tmp_text: %s\n", tmp_text);
-                // printf("php_ahocorasick_match_handler: %p\n", php_ahocorasick_match_handler);
-                // printf("php_ahocorasick_match_handler: %s\n", php_ahocorasick_match_handler);
-                // printf("my_param: %p\n", my_param);
-                // printf("my_param: %s\n", my_param);
+        printf("ahoMaster->acap: %p\n", ahoMaster->acap);
+        // printf("tmp_text: %s\n", tmp_text);
+        // printf("php_ahocorasick_match_handler: %p\n", php_ahocorasick_match_handler);
+        // printf("php_ahocorasick_match_handler: %s\n", php_ahocorasick_match_handler);
+        // printf("my_param: %p\n", my_param);
+        // printf("my_param: %s\n", my_param);
 
-                ac_trie_search(ahoMaster->acap, &tmp_text, 0, php_ahocorasick_match_handler, (void *)(&my_param));
-        }
+        ac_trie_search(ahoMaster->acap, &tmp_text, 0, php_ahocorasick_match_handler, (void *)(&my_param));
+}
 
 /**
  * De-initializes AhoCorasick master resource
@@ -825,9 +820,8 @@ PHP_FUNCTION(ahocorasick_match)
  * @param 
  * @return 
  */
-PHP_FUNCTION(ahocorasick_deinit)
-        {
-                ahocorasick_master_t * ahoMaster = NULL;
+PHP_FUNCTION(ahocorasick_deinit) {
+        ahocorasick_master_t * ahoMaster = NULL;
 
 #if PHP7
         zval *zid;
@@ -862,16 +856,15 @@ PHP_FUNCTION(ahocorasick_deinit)
         zend_list_delete(Z_LVAL_P(zval_aho_master));
 #endif
         RETURN_TRUE;
-        }
+}
 
 /**
  * Initializes AhoCorasick search structure with passed data
  * @param 
  * @return
  */
-PHP_FUNCTION(ahocorasick_init)
-        {
-                zval * arr;
+PHP_FUNCTION(ahocorasick_init) {
+        zval * arr;
         HashTable *arr_hash;
 
         if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "a", &arr) == FAILURE) {
@@ -905,20 +898,19 @@ PHP_FUNCTION(ahocorasick_init)
 #else
         ZEND_REGISTER_RESOURCE(return_value, ahomaster, le_ahocorasick_master);
 #endif
-                // ahocorasick_pattern_t build OK.
-                // Keep in mind that we are not freeing strings allocated in memory, it is
-                // still used internally in aho structure, this free is postponed to releasing
-                // aho structure.
-        }
+        // ahocorasick_pattern_t build OK.
+        // Keep in mind that we are not freeing strings allocated in memory, it is
+        // still used internally in aho structure, this free is postponed to releasing
+        // aho structure.
+}
 
 /**
  * Finalizes aho corasick search structure
  * @param
  * @return
  */
-PHP_FUNCTION(ahocorasick_finalize)
-        {
-                ahocorasick_master_t * ahoMaster = NULL;
+PHP_FUNCTION(ahocorasick_finalize) {
+        ahocorasick_master_t * ahoMaster = NULL;
 
 #if PHP7
         zval *zid;
@@ -946,16 +938,15 @@ PHP_FUNCTION(ahocorasick_finalize)
                 RETURN_FALSE;
             }
         }
-        }
+}
 
 /**
  * Adds search patterns to the non-finalized search trie.
  * @param
  * @return
  */
-PHP_FUNCTION(ahocorasick_add_patterns)
-        {
-                zval * arr;
+PHP_FUNCTION(ahocorasick_add_patterns) {
+        zval * arr;
         ahocorasick_master_t *ahoMaster = NULL;
         HashTable *arr_hash = NULL;
 

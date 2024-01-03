@@ -19,7 +19,7 @@
 */
 
 #ifndef _MPOOL_H_
-#define	_MPOOL_H_
+#define    _MPOOL_H_
 
 #include "acmem.h"
 
@@ -31,7 +31,7 @@
 #define AC_MFREE free
 #endif
 
-#ifdef	__cplusplus
+#ifdef    __cplusplus
 extern "C" {
 #endif
 
@@ -39,16 +39,19 @@ extern "C" {
 struct mpool;
 
 
-struct mpool *mpool_create (size_t size);
-void mpool_free (struct mpool *pool);
+struct mpool *mpool_create(size_t size);
 
-void *mpool_malloc (struct mpool *pool, size_t size);
-void *mpool_strdup (struct mpool *pool, const char *str);
-void *mpool_strndup (struct mpool *pool, const char *str, size_t n);
+void mpool_free(struct mpool *pool);
+
+void *mpool_malloc(struct mpool *pool, size_t size);
+
+void *mpool_strdup(struct mpool *pool, const char *str);
+
+void *mpool_strndup(struct mpool *pool, const char *str, size_t n);
 
 
-#ifdef	__cplusplus
+#ifdef    __cplusplus
 }
 #endif
 
-#endif	/* _MPOOL_H_ */
+#endif    /* _MPOOL_H_ */

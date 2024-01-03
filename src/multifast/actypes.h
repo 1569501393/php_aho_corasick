@@ -44,8 +44,7 @@ typedef char AC_ALPHABET_t;
  * The text (strings of alphabets) type that is used for input/output when 
  * dealing with the A.C. Trie. The text can contain zero value alphabets. 
  */
-typedef struct ac_text
-{
+typedef struct ac_text {
     const AC_ALPHABET_t *astring;   /**< String of alphabets */
     size_t length;                  /**< String length */
 } AC_TEXT_t;
@@ -54,8 +53,7 @@ typedef struct ac_text
  * Pattern ID type
  * @see struct ac_pattid
  */
-enum ac_pattid_type
-{
+enum ac_pattid_type {
     AC_PATTID_TYPE_DEFAULT = 0,
     AC_PATTID_TYPE_NUMBER,
     AC_PATTID_TYPE_STRING
@@ -70,27 +68,24 @@ enum ac_pattid_type
  * reference. We provisioned two possible types as a union. you can add your 
  * type here.
  */
-typedef struct ac_pattid
-{
-    union
-    {
+typedef struct ac_pattid {
+    union {
         const char *stringy;    /**< Null-terminated string */
         long number;            /**< Item indicator */
     } u;
-    
+
     enum ac_pattid_type type;   /**< Shows the type of id */
-    
+
 } AC_PATTID_t;
 
 /**
  * This is the pattern type that the trie must be fed by.
  */
-typedef struct ac_pattern
-{
+typedef struct ac_pattern {
     AC_TEXT_t ptext;    /**< The search string */
     AC_TEXT_t rtext;    /**< The replace string */
     AC_PATTID_t id;   /**< Pattern identifier */
-    void * aux;       /**< User defined object */
+    void *aux;       /**< User defined object */
 } AC_PATTERN_t;
 
 /**
@@ -103,11 +98,10 @@ typedef struct ac_pattern
  * between matched patterns: the shorter one is a factor (tail) of the longer
  * one. The 'position' maintains the end position of matched patterns.
  */
-typedef struct ac_match
-{
+typedef struct ac_match {
     AC_PATTERN_t *patterns;     /**< Array of matched pattern(s) */
     size_t size;                /**< Number of matched pattern(s) */
-    
+
     size_t position;    /**< The end position of the matching pattern(s) in 
                          * the input text */
 } AC_MATCH_t;
@@ -115,8 +109,7 @@ typedef struct ac_match
 /**
  * The return status of various A.C. Trie functions
  */
-typedef enum ac_status
-{
+typedef enum ac_status {
     ACERR_SUCCESS = 0,          /**< No error occurred */
     ACERR_DUPLICATE_PATTERN,    /**< Duplicate patterns */
     ACERR_LONG_PATTERN,         /**< Pattern length is too long */
@@ -156,8 +149,7 @@ typedef void (*MF_REPLACE_CALBACK_f)(AC_TEXT_t *, void *);
 #error "REPLACEMENT_BUFFER_SIZE must be bigger than AC_PATTRN_MAX_LENGTH"
 #endif
 
-typedef enum act_working_mode
-{
+typedef enum act_working_mode {
     AC_WORKING_MODE_SEARCH = 0, /* Default */
     AC_WORKING_MODE_FINDNEXT,
     AC_WORKING_MODE_REPLACE     /* Not used */

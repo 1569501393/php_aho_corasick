@@ -30,26 +30,29 @@
 /* Privates */
 
 static void ac_trie_set_failure
-    (ACT_NODE_t *node, AC_ALPHABET_t *alphas);
+        (ACT_NODE_t *node, AC_ALPHABET_t *alphas);
 
-static void ac_trie_traverse_setfailure 
-    (ACT_NODE_t *node, AC_ALPHABET_t *prefix);
+static void ac_trie_traverse_setfailure
+        (ACT_NODE_t *node, AC_ALPHABET_t *prefix);
 
-static void ac_trie_traverse_action 
-    (ACT_NODE_t *node, void(*func)(ACT_NODE_t *), int top_down);
+static void ac_trie_traverse_action
+        (ACT_NODE_t *node, void(*func)(ACT_NODE_t *), int top_down);
 
-static void ac_trie_reset 
-    (AC_TRIE_t *thiz);
+static void ac_trie_reset
+        (AC_TRIE_t *thiz);
 
-static int ac_trie_match_handler 
-    (AC_MATCH_t * matchp, void * param);
+static int ac_trie_match_handler
+        (AC_MATCH_t *matchp, void *param);
 
 /* Friends */
 
-extern void mf_repdata_init (AC_TRIE_t *thiz);
-extern void mf_repdata_reset (MF_REPLACEMENT_DATA_t *rd);
-extern void mf_repdata_release (MF_REPLACEMENT_DATA_t *rd);
-extern void mf_repdata_allocbuf (MF_REPLACEMENT_DATA_t *rd);
+extern void mf_repdata_init(AC_TRIE_t *thiz);
+
+extern void mf_repdata_reset(MF_REPLACEMENT_DATA_t *rd);
+
+extern void mf_repdata_release(MF_REPLACEMENT_DATA_t *rd);
+
+extern void mf_repdata_allocbuf(MF_REPLACEMENT_DATA_t *rd);
 
 
 /**
@@ -57,23 +60,22 @@ extern void mf_repdata_allocbuf (MF_REPLACEMENT_DATA_t *rd);
  * 
  * @return 
  *****************************************************************************/
-AC_TRIE_t *ac_trie_create (void)
-{
-    AC_TRIE_t *thiz = (AC_TRIE_t *) malloc (sizeof(AC_TRIE_t));
+AC_TRIE_t *ac_trie_create(void) {
+    AC_TRIE_t *thiz = (AC_TRIE_t *) malloc(sizeof(AC_TRIE_t));
     thiz->mp = mpool_create(0);
-    
-    thiz->root = node_create (thiz);
-    
+
+    thiz->root = node_create(thiz);
+
     thiz->patterns_count = 0;
-    
-    mf_repdata_init (thiz);
-    ac_trie_reset (thiz);    
+
+    mf_repdata_init(thiz);
+    ac_trie_reset(thiz);
     thiz->text = NULL;
     thiz->position = 0;
-    
+
     thiz->wm = AC_WORKING_MODE_SEARCH;
     thiz->trie_open = 1;
-    
+
     return thiz;
 }
 
@@ -89,45 +91,40 @@ AC_TRIE_t *ac_trie_create (void)
  * 
  * @return The return value indicates the success or failure of adding action
  *****************************************************************************/
-AC_STATUS_t ac_trie_add (AC_TRIE_t *thiz, AC_PATTERN_t *patt, int copy)
-{
+AC_STATUS_t ac_trie_add(AC_TRIE_t *thiz, AC_PATTERN_t *patt, int copy) {
     size_t i;
     ACT_NODE_t *n = thiz->root;
     ACT_NODE_t *next;
     AC_ALPHABET_t alpha;
-    
-    if(!thiz->trie_open)
+
+    if (!thiz->trie_open)
         return ACERR_TRIE_CLOSED;
-    
+
     if (!patt->ptext.length)
         return ACERR_ZERO_PATTERN;
-    
+
     if (patt->ptext.length > AC_PATTRN_MAX_LENGTH)
         return ACERR_LONG_PATTERN;
-    
-    for (i = 0; i < patt->ptext.length; i++)
-    {
+
+    for (i = 0; i < patt->ptext.length; i++) {
         alpha = patt->ptext.astring[i];
-        if ((next = node_find_next (n, alpha)))
-        {
+        if ((next = node_find_next(n, alpha))) {
             n = next;
             continue;
-        }
-        else
-        {
-            next = node_create_next (n, alpha);
+        } else {
+            next = node_create_next(n, alpha);
             next->depth = n->depth + 1;
             n = next;
         }
     }
-    
-    if(n->final)
+
+    if (n->final)
         return ACERR_DUPLICATE_PATTERN;
-    
+
     n->final = 1;
-    node_accept_pattern (n, patt, copy);
+    node_accept_pattern(n, patt, copy);
     thiz->patterns_count++;
-    
+
     return ACERR_SUCCESS;
 }
 
@@ -141,17 +138,16 @@ AC_STATUS_t ac_trie_add (AC_TRIE_t *thiz, AC_PATTERN_t *patt, int copy)
  * 
  * @param thiz pointer to the trie
  *****************************************************************************/
-void ac_trie_finalize (AC_TRIE_t *thiz)
-{
-    AC_ALPHABET_t prefix[AC_PATTRN_MAX_LENGTH]; 
-    
+void ac_trie_finalize(AC_TRIE_t *thiz) {
+    AC_ALPHABET_t prefix[AC_PATTRN_MAX_LENGTH];
+
     /* 'prefix' defined here, because ac_trie_traverse_setfailure() calls
      * itself recursively */
-    ac_trie_traverse_setfailure (thiz->root, prefix);
-    
-    ac_trie_traverse_action (thiz->root, node_collect_matches, 1);
-    mf_repdata_allocbuf (&thiz->repdata);
-    
+    ac_trie_traverse_setfailure(thiz->root, prefix);
+
+    ac_trie_traverse_action(thiz->root, node_collect_matches, 1);
+    mf_repdata_allocbuf(&thiz->repdata);
+
     thiz->trie_open = 0; /* Do not accept patterns any more */
 }
 
@@ -173,9 +169,8 @@ void ac_trie_finalize (AC_TRIE_t *thiz)
  *  0:  success; input text was searched to the end
  *  1:  success; input text was searched partially. (callback broke the loop)
  *****************************************************************************/
-int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep, 
-        AC_MATCH_CALBACK_f callback, void *user)
-{
+int ac_trie_search(AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
+                   AC_MATCH_CALBACK_f callback, void *user) {
     size_t position;
     ACT_NODE_t *current;
     ACT_NODE_t *next;
@@ -183,15 +178,15 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
 
     if (thiz->trie_open)
         return -1;  /* Trie must be finalized first. */
-    
+
     if (thiz->wm == AC_WORKING_MODE_FINDNEXT)
         position = thiz->position;
     else
         position = 0;
-    
+
     if (!keep)
-        ac_trie_reset (thiz);
-    
+        ac_trie_reset(thiz);
+
     current = thiz->last_node;
     printf("current = %p\n", current->trie->text);
 
@@ -202,44 +197,42 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
     // TODO text->astring = Apples,Apple, I like Apples and Bananas, text->length = 39, position = 0
     printf("TODO text->astring = %s, text->length = %zu, position = %zu\n", text->astring, text->length, position);
 
-    while (position < text->length)
-    {
-        if (!(next = node_find_next_bs (current, text->astring[position])))
-        {
-            if(current->failure_node /* We are not in the root node */)
+    while (position < text->length) {
+        if (!(next = node_find_next_bs(current, text->astring[position]))) {
+            if (current->failure_node /* We are not in the root node */)
                 current = current->failure_node;
             else
                 position++;
-        }
-        else
-        {
+        } else {
             current = next;
             position++;
         }
 
         if (current->final && next)
-        /* We check 'next' to find out if we have come here after a alphabet
-         * transition or due to a fail transition. in second case we should not 
-         * report match, because it has already been reported */
+            /* We check 'next' to find out if we have come here after a alphabet
+             * transition or due to a fail transition. in second case we should not
+             * report match, because it has already been reported */
         {
             printf("TODO current->id = %d, current->final = %d, next->id = %d, next->final = %d, position = %zu\n",
-                   current->id, current->final, next->id,next->final, position);
+                   current->id, current->final, next->id, next->final, position);
             int is_hit = 1;
-            int start_position = position - strlen( current->matched->ptext.astring);
+            int start_position = position - strlen(current->matched->ptext.astring);
 
-            if(start_position > 0) {
+            if (start_position > 0) {
                 char prev_char = text->astring[start_position - 1];
-                printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d, position = %zu \n", prev_char, isalnum(prev_char), start_position, position);
-                if(isalnum(prev_char)) {
+                printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d, position = %zu \n",
+                       prev_char, isalnum(prev_char), start_position, position);
+                if (isalnum(prev_char)) {
                     is_hit = 0;
                 }
             }
 
-            if(is_hit) {
-                if(position < strlen(text->astring)) {
+            if (is_hit) {
+                if (position < strlen(text->astring)) {
                     char next_char = text->astring[position];
-                    printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d, position = %zu \n", next_char, isalnum(next_char), start_position, position);
-                    if(isalnum(next_char)) {
+                    printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d, position = %zu \n",
+                           next_char, isalnum(next_char), start_position, position);
+                    if (isalnum(next_char)) {
                         is_hit = 0;
                     }
                 }
@@ -254,11 +247,11 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
 
             printf("match.position=%zu, match.size=%zu\n", match.position, match.size);
             printf("match.patterns->ptext.astring = %s, match.patterns->rtext.astring = %s, strlen(match.patterns->ptext.astring) = %lu, start_position = %hhd\n",
-                   match.patterns->ptext.astring, match.patterns->rtext.astring, strlen(match.patterns->ptext.astring), start_position);
+                   match.patterns->ptext.astring, match.patterns->rtext.astring, strlen(match.patterns->ptext.astring),
+                   start_position);
 
             /* Do call-back */
-            if (is_hit && callback(&match, user))
-            {
+            if (is_hit && callback(&match, user)) {
                 if (thiz->wm == AC_WORKING_MODE_FINDNEXT) {
                     thiz->position = position;
                     thiz->last_node = current;
@@ -267,11 +260,11 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
             }
         }
     }
-    
+
     /* Save status variables */
     thiz->last_node = current;
     thiz->base_position += position;
-    
+
     return 0;
 }
 
@@ -285,11 +278,10 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
  * @param keep Indicates that if the given text is the sequel of the previous
  * one or not; 1: it is, 0: it is not
  *****************************************************************************/
-void ac_trie_settext (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep)
-{
+void ac_trie_settext(AC_TRIE_t *thiz, AC_TEXT_t *text, int keep) {
     if (!keep)
-        ac_trie_reset (thiz);
-    
+        ac_trie_reset(thiz);
+
     thiz->text = text;
     thiz->position = 0;
 }
@@ -300,18 +292,17 @@ void ac_trie_settext (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep)
  * @param thiz The pointer to the trie
  * @return A pointer to the matched structure
  *****************************************************************************/
-AC_MATCH_t ac_trie_findnext (AC_TRIE_t *thiz)
-{
+AC_MATCH_t ac_trie_findnext(AC_TRIE_t *thiz) {
     AC_MATCH_t match;
-    
+
     thiz->wm = AC_WORKING_MODE_FINDNEXT;
     match.size = 0;
-    
-    ac_trie_search (thiz, thiz->text, 1, 
-            ac_trie_match_handler, (void *)&match);
-    
+
+    ac_trie_search(thiz, thiz->text, 1,
+                   ac_trie_match_handler, (void *) &match);
+
     thiz->wm = AC_WORKING_MODE_SEARCH;
-    
+
     return match;
 }
 
@@ -320,12 +311,11 @@ AC_MATCH_t ac_trie_findnext (AC_TRIE_t *thiz)
  * 
  * @param thiz pointer to the trie
  *****************************************************************************/
-void ac_trie_release (AC_TRIE_t *thiz)
-{
+void ac_trie_release(AC_TRIE_t *thiz) {
     /* It must be called with a 0 top-down parameter */
-    ac_trie_traverse_action (thiz->root, node_release_vectors, 0);
-    
-    mf_repdata_release (&thiz->repdata);
+    ac_trie_traverse_action(thiz->root, node_release_vectors, 0);
+
+    mf_repdata_release(&thiz->repdata);
     mpool_free(thiz->mp);
     free(thiz);
 }
@@ -336,9 +326,8 @@ void ac_trie_release (AC_TRIE_t *thiz)
  * 
  * @param thiz pointer to the trie
  *****************************************************************************/
-void ac_trie_display (AC_TRIE_t *thiz)
-{
-    ac_trie_traverse_action (thiz->root, node_display, 1);
+void ac_trie_display(AC_TRIE_t *thiz) {
+    ac_trie_traverse_action(thiz->root, node_display, 1);
 }
 
 /**
@@ -348,9 +337,8 @@ void ac_trie_display (AC_TRIE_t *thiz)
  * @param param
  * @return 
  *****************************************************************************/
-static int ac_trie_match_handler (AC_MATCH_t * matchp, void * param)
-{
-    AC_MATCH_t * mp = (AC_MATCH_t *)param;
+static int ac_trie_match_handler(AC_MATCH_t *matchp, void *param) {
+    AC_MATCH_t *mp = (AC_MATCH_t *) param;
     mp->position = matchp->position;
     mp->patterns = matchp->patterns;
     mp->size = matchp->size;
@@ -362,11 +350,10 @@ static int ac_trie_match_handler (AC_MATCH_t * matchp, void * param)
  * 
  * @param thiz pointer to the trie
  *****************************************************************************/
-static void ac_trie_reset (AC_TRIE_t *thiz)
-{
+static void ac_trie_reset(AC_TRIE_t *thiz) {
     thiz->last_node = thiz->root;
     thiz->base_position = 0;
-    mf_repdata_reset (&thiz->repdata);
+    mf_repdata_reset(&thiz->repdata);
 }
 
 /**
@@ -377,27 +364,24 @@ static void ac_trie_reset (AC_TRIE_t *thiz)
  * root the the node.
  *****************************************************************************/
 static void ac_trie_set_failure
-    (ACT_NODE_t *node, AC_ALPHABET_t *prefix)
-{
+        (ACT_NODE_t *node, AC_ALPHABET_t *prefix) {
     size_t i, j;
     ACT_NODE_t *n;
     ACT_NODE_t *root = node->trie->root;
-    
+
     if (node == root)
         return; /* Failure transition is not defined for the root */
-    
-    for (i = 1; i < node->depth; i++)
-    {
+
+    for (i = 1; i < node->depth; i++) {
         n = root;
         for (j = i; j < node->depth && n; j++)
-            n = node_find_next (n, prefix[j]);
-        if (n)
-        {
+            n = node_find_next(n, prefix[j]);
+        if (n) {
             node->failure_node = n;
             break;
         }
     }
-    
+
     if (!node->failure_node)
         node->failure_node = root;
 }
@@ -413,20 +397,18 @@ static void ac_trie_set_failure
  * @param prefix The array that contain the prefix that leads the path from
  * root the the node
  *****************************************************************************/
-static void ac_trie_traverse_setfailure 
-    (ACT_NODE_t *node, AC_ALPHABET_t *prefix)
-{
+static void ac_trie_traverse_setfailure
+        (ACT_NODE_t *node, AC_ALPHABET_t *prefix) {
     size_t i;
-    
+
     /* In each node, look for its failure node */
-    ac_trie_set_failure (node, prefix);
-    
-    for (i = 0; i < node->outgoing_size; i++)
-    {
+    ac_trie_set_failure(node, prefix);
+
+    for (i = 0; i < node->outgoing_size; i++) {
         prefix[node->depth] = node->outgoing[i].alpha; /* Make the prefix */
-        
+
         /* Recursively call itself to traverse all nodes */
-        ac_trie_traverse_setfailure (node->outgoing[i].next, prefix);
+        ac_trie_traverse_setfailure(node->outgoing[i].next, prefix);
     }
 }
 
@@ -440,18 +422,17 @@ static void ac_trie_traverse_setfailure
  * @param top_down Indicates that if the action should be applied to the note
  * itself and then to its children or vise versa.
  *****************************************************************************/
-static void ac_trie_traverse_action 
-    (ACT_NODE_t *node, void(*func)(ACT_NODE_t *), int top_down)
-{
+static void ac_trie_traverse_action
+        (ACT_NODE_t *node, void(*func)(ACT_NODE_t *), int top_down) {
     size_t i;
-    
+
     if (top_down)
-        func (node);
-    
+        func(node);
+
     for (i = 0; i < node->outgoing_size; i++)
         /* Recursively call itself to traverse all nodes */
-        ac_trie_traverse_action (node->outgoing[i].next, func, top_down);
-    
+        ac_trie_traverse_action(node->outgoing[i].next, func, top_down);
+
     if (!top_down)
-        func (node);
+        func(node);
 }

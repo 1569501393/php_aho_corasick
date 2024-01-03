@@ -20,19 +20,18 @@
 */
 
 #ifndef _MF_REPLACE_H_
-#define	_MF_REPLACE_H_
+#define    _MF_REPLACE_H_
 
 #include "actypes.h"
 
-#ifdef	__cplusplus
+#ifdef    __cplusplus
 extern "C" {
 #endif
 
 /**
  * Different replace modes
  */
-typedef enum mf_replace_mode
-{
+typedef enum mf_replace_mode {
     MF_REPLACE_MODE_DEFAULT = 0,
     MF_REPLACE_MODE_NORMAL, /**< Normal replace mode: Short factors are swollen
                               * by the big one; All other patterns are replced 
@@ -53,8 +52,7 @@ typedef enum mf_replace_mode
  * and can be replaced by its substitute. To keep a record of packets we use 
  * the following structure.
  */
-struct mf_replacement_nominee
-{
+struct mf_replacement_nominee {
     AC_PATTERN_t *pattern;
     size_t position;
 };
@@ -63,40 +61,39 @@ struct mf_replacement_nominee
 /**
  * Contains replacement related data
  */
-typedef struct mf_replacement_date
-{
+typedef struct mf_replacement_date {
     AC_TEXT_t buffer;   /**< replacement buffer: maintains the result 
                          * of replacement */
-    
+
     AC_TEXT_t backlog;  /**< replacement backlog: if a pattern is divided 
                          * between two or more different chunks, then at the 
                          * end of the first chunk we need to keep it here until 
                          * the next chunk comes and we decide if it is a 
                          * pattern or just a pattern prefix. */
-    
+
     unsigned int has_replacement; /**< total number of to-be-replaced patterns 
                                    */
-    
+
     struct mf_replacement_nominee *noms; /**< Replacement nominee array */
     size_t noms_capacity; /**< Max capacity of the array */
     size_t noms_size;  /**< Number of nominees in the array */
-    
+
     size_t curser; /**< the position in the input text before which all 
                     * patterns are replaced and the result is saved to the
                     * buffer. */
-    
+
     MF_REPLACE_MODE_t replace_mode;  /**< Replace mode */
-    
+
     MF_REPLACE_CALBACK_f cbf;   /**< Callback function */
     void *user;    /**< User parameters sent to the callback function */
-    
+
     struct ac_trie *trie; /**< Pointer to the trie */
-    
+
 } MF_REPLACEMENT_DATA_t;
 
 
-#ifdef	__cplusplus
+#ifdef    __cplusplus
 }
 #endif
 
-#endif	/* REPLACE_H */
+#endif    /* REPLACE_H */

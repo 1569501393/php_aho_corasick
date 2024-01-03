@@ -134,9 +134,9 @@ typedef size_t strsize_t;
 #include "multifast/actypes.h"
 
 ZEND_BEGIN_MODULE_GLOBALS(ahocorasick)
-    long counter;
-    zend_bool direction;
-ZEND_END_MODULE_GLOBALS(ahocorasick)
+        long counter;
+        zend_bool direction;
+                ZEND_END_MODULE_GLOBALS(ahocorasick)
 
 #ifdef ZTS
 #define AHOCORASICK_G(v) TSRMG(ahocorasick_globals_id, zend_ahocorasick_globals *, v)
@@ -148,9 +148,9 @@ ZEND_END_MODULE_GLOBALS(ahocorasick)
  * Sample param to pass to callback handler for AhoCorasick search algorithm
  */
 struct ahocorasick_callback_payload_t {
-        // found match will be added here
-        int retVal;
-        COMPAT_ZVAL resultArray;
+    // found match will be added here
+    int retVal;
+    COMPAT_ZVAL resultArray;
 };
 
 /**
@@ -169,8 +169,8 @@ typedef struct ahocorasick_pattern_t {
     int ignoreCase;
     COMPAT_ZVAL auxObj;
 
-    struct ahocorasick_pattern_t * next;
-    struct ahocorasick_pattern_t * prev;
+    struct ahocorasick_pattern_t *next;
+    struct ahocorasick_pattern_t *prev;
 } ahocorasick_pattern_t;
 
 /**
@@ -178,13 +178,13 @@ typedef struct ahocorasick_pattern_t {
  */
 typedef struct ahocorasick_master_t {
     // aho corasick main search tree
-    AC_TRIE_t * acap;
+    AC_TRIE_t *acap;
     // if structure was finalized, is set to 1
     unsigned char ac_finalized;
     // if initialization was ok, is set to 1.
     unsigned char init_ok;
     // root of the doubly linked list for search patterns
-    ahocorasick_pattern_t * patterns;
+    ahocorasick_pattern_t *patterns;
     // size of the search pattern list
     long pattern_count;
 } ahocorasick_master_t;
