@@ -626,8 +626,8 @@ static int php_ahocorasick_match_handler(AC_MATCH_t *m, void *param) {
             COMPAT_ADD_ASSOC_ZVAL(mysubarray, "aux", curPattern->auxObj);
         }
 
-        add_assoc_long(COMPAT_Z_ARREF(mysubarray), "start_postion",
-                       (m->position - COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))));
+        // add_assoc_long(COMPAT_Z_ARREF(mysubarray), "start_postion",
+        //                (m->position - COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))));
         add_assoc_long(COMPAT_Z_ARREF(mysubarray), "start_position",
                        (m->position - COMPAT_Z_STRLEN_PP(COMPAT_Z_ARREF(curPattern->zVal))));
 
@@ -810,11 +810,11 @@ PHP_FUNCTION(ahocorasick_match)
 //                printf("TODO Searching...tmp_text=%s \n", tmp_text);
 
                 printf("ahoMaster->acap: %p\n", ahoMaster->acap);
-                printf("tmp_text: %s\n", tmp_text);
-                printf("php_ahocorasick_match_handler: %p\n", php_ahocorasick_match_handler);
-                printf("php_ahocorasick_match_handler: %s\n", php_ahocorasick_match_handler);
-                printf("my_param: %p\n", my_param);
-                printf("my_param: %s\n", my_param);
+                // printf("tmp_text: %s\n", tmp_text);
+                // printf("php_ahocorasick_match_handler: %p\n", php_ahocorasick_match_handler);
+                // printf("php_ahocorasick_match_handler: %s\n", php_ahocorasick_match_handler);
+                // printf("my_param: %p\n", my_param);
+                // printf("my_param: %s\n", my_param);
 
                 ac_trie_search(ahoMaster->acap, &tmp_text, 0, php_ahocorasick_match_handler, (void *)(&my_param));
         }

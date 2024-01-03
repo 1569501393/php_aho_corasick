@@ -199,7 +199,6 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
      * It must be kept as lightweight as possible.
      */
 
-    // TODO
     // TODO text->astring = Apples,Apple, I like Apples and Bananas, text->length = 39, position = 0
     printf("TODO text->astring = %s, text->length = %zu, position = %zu\n", text->astring, text->length, position);
 
@@ -218,13 +217,6 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
             position++;
         }
 
-//        printf("TODO current->trie = %s\n", current->trie->text);
-
-//        printf("TODO current->id = %d, current->final = %d, next->id = %d, next->final = %d, position = %zu\n",
-//               current->id, current->final, next->id,next->final, position);
-
-
-
         if (current->final && next)
         /* We check 'next' to find out if we have come here after a alphabet
          * transition or due to a fail transition. in second case we should not 
@@ -232,53 +224,12 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
         {
             printf("TODO current->id = %d, current->final = %d, next->id = %d, next->final = %d, position = %zu\n",
                    current->id, current->final, next->id,next->final, position);
-
-
-
-            // TODO
-            /*
-            callback(&match, user) 将匹配关键词添加到数组  COMPAT_Z_ARREF(mysubarray)
-            */
-
-
-            // TODO 判断是否能进入， final 后，更具 text 前后是否空格或者标点符号，才能进入
-            /*
-             * // 判断匹配前后字符
-                // 后一位
-                if ($j < $textLength) {
-                    $nextChar = substr($text, $j, 1);
-                    echo '$nextChar===' . $nextChar . 'ctype_alpha($nextChar)===' . ctype_alpha($nextChar) . "\n";
-
-                    // 后一位不是 标点符号或者空格，则跳过
-                    if (! (ctype_punct($nextChar) || ctype_space($nextChar))) {
-                        break;
-                    }
-                }
-
-                // 前一位
-                if ($i > 0) {
-                    $previousChar = substr($text, $i - 1, 1);
-                    echo '===$previousChar===' . $previousChar . '===ctype_alpha($previousChar)===' . ctype_alpha($previousChar) . "\n";
-
-                    // 后一位不是 标点符号或者空格，则跳过
-                    if (! (ctype_punct($previousChar) || ctype_space($previousChar))) {
-                        break;
-                    }
-                }
-             * */
             int is_hit = 1;
-
-//            int start_position = position - strlen(match.patterns->ptext.astring);
-//            int start_position = 0;
             int start_position = position - strlen( current->matched->ptext.astring);
 
-//            printf("match.patterns->ptext.astring=%s\n", current->matched->ptext.astring);
-//            int  start_position = position - current->trie->text->length;
             if(start_position > 0) {
                 char prev_char = text->astring[start_position - 1];
-//                char next_char = text->astring[position + 1];
                 printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d, position = %zu \n", prev_char, isalnum(prev_char), start_position, position);
-//                printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d \n", next_char, isalnum(next_char), start_position);
                 if(isalnum(prev_char)) {
                     is_hit = 0;
                 }
@@ -286,9 +237,7 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
 
             if(is_hit) {
                 if(position < strlen(text->astring)) {
-//                    char prev_char = text->astring[start_position - 1];
                     char next_char = text->astring[position];
-//                    printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d \n", prev_char, isalnum(prev_char), start_position);
                     printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d, position = %zu \n", next_char, isalnum(next_char), start_position, position);
                     if(isalnum(next_char)) {
                         is_hit = 0;
@@ -296,7 +245,6 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
                 }
             }
 
-//            printf("is_hit=%d, position=%zu, length = %s\n", is_hit, position, current->trie->text->astring);
             printf("is_hit=%d, position=%zu\n", is_hit, position);
 
             /* Found a match! */
@@ -304,12 +252,9 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
             match.size = current->matched_size;
             match.patterns = current->matched;
 
-            printf("match.position=%zu\n", match.position);
-            printf("match.size=%zu\n", match.size);
+            printf("match.position=%zu, match.size=%zu\n", match.position, match.size);
             printf("match.patterns->ptext.astring = %s, match.patterns->rtext.astring = %s, strlen(match.patterns->ptext.astring) = %lu, start_position = %hhd\n",
                    match.patterns->ptext.astring, match.patterns->rtext.astring, strlen(match.patterns->ptext.astring), start_position);
-
-
 
             /* Do call-back */
             if (is_hit && callback(&match, user))
