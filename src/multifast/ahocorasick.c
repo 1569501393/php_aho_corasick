@@ -266,7 +266,7 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
                     }
                 }
              * */
-            int can_enter = 1;
+            int is_hit = 1;
 
 //            int start_position = position - strlen(match.patterns->ptext.astring);
 //            int start_position = 0;
@@ -280,24 +280,24 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
                 printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d, position = %zu \n", prev_char, isalnum(prev_char), start_position, position);
 //                printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d \n", next_char, isalnum(next_char), start_position);
                 if(isalnum(prev_char)) {
-                    can_enter = 0;
+                    is_hit = 0;
                 }
             }
 
-            if(can_enter) {
+            if(is_hit) {
                 if(position < strlen(text->astring)) {
 //                    char prev_char = text->astring[start_position - 1];
                     char next_char = text->astring[position];
 //                    printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d \n", prev_char, isalnum(prev_char), start_position);
                     printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d, position = %zu \n", next_char, isalnum(next_char), start_position, position);
                     if(isalnum(next_char)) {
-                        can_enter = 0;
+                        is_hit = 0;
                     }
                 }
             }
 
-//            printf("can_enter=%d, position=%zu, length = %s\n", can_enter, position, current->trie->text->astring);
-            printf("can_enter=%d, position=%zu\n", can_enter, position);
+//            printf("is_hit=%d, position=%zu, length = %s\n", is_hit, position, current->trie->text->astring);
+            printf("is_hit=%d, position=%zu\n", is_hit, position);
 
             /* Found a match! */
             match.position = position + thiz->base_position;
@@ -312,7 +312,7 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
 
 
             /* Do call-back */
-            if (can_enter && callback(&match, user))
+            if (is_hit && callback(&match, user))
             {
                 if (thiz->wm == AC_WORKING_MODE_FINDNEXT) {
                     thiz->position = position;

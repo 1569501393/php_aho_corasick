@@ -14,13 +14,53 @@ $data = array(
     array('value' => 'Apple'),
     array('value' => 'Banana'),
     array('value' => 'LV good'),
+    array('value' => 'Dainely'),
+    array('value' => 'lv'),
+//     array('value' => 'trade'),
 );
 // initialize search , returns resourceID for search structure
 $c = ahocorasick_init($data);
 unset($data);
 
 // perform search 1
-$text = '1™Apple👋, 👿I like Apples and Bananas, I like LV good@.';
+// 测试前后特殊字符空格
+// $text = '🔥Apple™1™Apple👋, 👿I like Apples and Bananas, I like LV good@.';
+// Dainely&trade  Dainely™
+// $text = 'Dainely1';
+// 👋占了3个字节
+// /home/jieqiang/lfdev/wwwroot/test/php_aho_corasick2/test.php:46:
+// array(1) {
+//   [0] =>
+//   array(4) {
+//     'pos' =>
+//     int(14)
+//     'start_postion' =>
+//     int(12)
+//     'start_position' =>
+//     int(12)
+//     'value' =>
+//     string(2) "lv"
+//   }
+// }
+// $text = 'lva lv1.👋lv.';
+
+// /home/jieqiang/lfdev/wwwroot/test/php_aho_corasick2/test.php:62:
+// array(1) {
+//  [0] =>
+//  array(4) {
+//    'pos' =>
+//    int(17)
+//    'start_postion' =>
+//    int(15)
+//    'start_position' =>
+//    int(15)
+//    'value' =>
+//    string(2) "lv"
+//  }
+// }
+// 中文字符也是占了3个字节
+// $text = '中lva lv1.👋lv.';
+$text = 'lv Apple';
 $d1 = ahocorasick_match($text, $c);
 // deinitialize search structure (will free memory)
 ahocorasick_deinit($c);
@@ -37,6 +77,11 @@ ahocorasick_deinit($c);
   }
 }*/
 var_dump($d1);
+
+// $text = '中';
+// // int(1)
+// // int(3)
+// var_dump(mb_strlen($text), strlen($text));
 exit;
 
 
