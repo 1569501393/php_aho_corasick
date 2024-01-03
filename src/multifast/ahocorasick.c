@@ -277,9 +277,9 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
             if(start_position > 0) {
                 char prev_char = text->astring[start_position - 1];
 //                char next_char = text->astring[position + 1];
-                printf("前一位prev_char = %c, isalpha(prev_char) = %d, start_position = %d, position = %zu \n", prev_char, isalpha(prev_char), start_position, position);
-//                printf("后一位next_char = %c, isalpha(next_char) = %d, start_position = %d \n", next_char, isalpha(next_char), start_position);
-                if(isalpha(prev_char)) {
+                printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d, position = %zu \n", prev_char, isalnum(prev_char), start_position, position);
+//                printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d \n", next_char, isalnum(next_char), start_position);
+                if(isalnum(prev_char)) {
                     can_enter = 0;
                 }
             }
@@ -288,9 +288,9 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
                 if(position < strlen(text->astring)) {
 //                    char prev_char = text->astring[start_position - 1];
                     char next_char = text->astring[position];
-//                    printf("前一位prev_char = %c, isalpha(prev_char) = %d, start_position = %d \n", prev_char, isalpha(prev_char), start_position);
-                    printf("后一位next_char = %c, isalpha(next_char) = %d, start_position = %d, position = %zu \n", next_char, isalpha(next_char), start_position, position);
-                    if(isalpha(next_char)) {
+//                    printf("前一位prev_char = %c, isalnum(prev_char) = %d, start_position = %d \n", prev_char, isalnum(prev_char), start_position);
+                    printf("后一位next_char = %c, isalnum(next_char) = %d, start_position = %d, position = %zu \n", next_char, isalnum(next_char), start_position, position);
+                    if(isalnum(next_char)) {
                         can_enter = 0;
                     }
                 }

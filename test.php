@@ -13,13 +13,14 @@ $data = array(
     array('value' => 'lfa'),
     array('value' => 'Apple'),
     array('value' => 'Banana'),
+    array('value' => 'LV good'),
 );
 // initialize search , returns resourceID for search structure
 $c = ahocorasick_init($data);
 unset($data);
 
 // perform search 1
-$text = 'Apple, I like Apples andBananas';
+$text = '1™Apple👋, 👿I like Apples and Bananas, I like LV good@.';
 $d1 = ahocorasick_match($text, $c);
 // deinitialize search structure (will free memory)
 ahocorasick_deinit($c);
