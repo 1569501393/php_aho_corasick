@@ -12,13 +12,14 @@ $data = array(
     array('key' => 'ag', 'value' => 'omega'),
     array('value' => 'lfa'),
     array('value' => 'Apple'),
+    array('value' => 'Banana'),
 );
 // initialize search , returns resourceID for search structure
 $c = ahocorasick_init($data);
 unset($data);
 
 // perform search 1
-$text = 'Apple, I like Apples and Bananas';
+$text = 'Apple, I like Apples andBananas';
 $d1 = ahocorasick_match($text, $c);
 // deinitialize search structure (will free memory)
 ahocorasick_deinit($c);

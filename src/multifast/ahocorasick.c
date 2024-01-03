@@ -19,6 +19,7 @@
 */
 
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -192,10 +193,16 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
         ac_trie_reset (thiz);
     
     current = thiz->last_node;
+    printf("current = %p\n", current->trie->text);
 
     /* This is the main search loop.
      * It must be kept as lightweight as possible.
      */
+
+    // TODO
+    // TODO text->astring = Apples,Apple, I like Apples and Bananas, text->length = 39, position = 0
+    printf("TODO text->astring = %s, text->length = %zu, position = %zu\n", text->astring, text->length, position);
+
     while (position < text->length)
     {
         if (!(next = node_find_next_bs (current, text->astring[position])))
@@ -210,23 +217,102 @@ int ac_trie_search (AC_TRIE_t *thiz, AC_TEXT_t *text, int keep,
             current = next;
             position++;
         }
-        
+
+//        printf("TODO current->trie = %s\n", current->trie->text);
+
+//        printf("TODO current->id = %d, current->final = %d, next->id = %d, next->final = %d, position = %zu\n",
+//               current->id, current->final, next->id,next->final, position);
+
+
+
         if (current->final && next)
         /* We check 'next' to find out if we have come here after a alphabet
          * transition or due to a fail transition. in second case we should not 
          * report match, because it has already been reported */
         {
-            /* Found a match! */
-            match.position = position + thiz->base_position;
-            match.size = current->matched_size;
-            match.patterns = current->matched;
+            printf("TODO current->id = %d, current->final = %d, next->id = %d, next->final = %d, position = %zu\n",
+                   current->id, current->final, next->id,next->final, position);
+
+
 
             // TODO
             /*
             callback(&match, user) 将匹配关键词添加到数组  COMPAT_Z_ARREF(mysubarray)
             */
+
+
+            // TODO 判断是否能进入， final 后，更具 text 前后是否空格或者标点符号，才能进入
+            /*
+             * // 判断匹配前后字符
+                // 后一位
+                if ($j < $textLength) {
+                    $nextChar = substr($text, $j, 1);
+                    echo '$nextChar===' . $nextChar . 'ctype_alpha($nextChar)===' . ctype_alpha($nextChar) . "\n";
+
+                    // 后一位不是 标点符号或者空格，则跳过
+                    if (! (ctype_punct($nextChar) || ctype_space($nextChar))) {
+                        break;
+                    }
+                }
+
+                // 前一位
+                if ($i > 0) {
+                    $previousChar = substr($text, $i - 1, 1);
+                    echo '===$previousChar===' . $previousChar . '===ctype_alpha($previousChar)===' . ctype_alpha($previousChar) . "\n";
+
+                    // 后一位不是 标点符号或者空格，则跳过
+                    if (! (ctype_punct($previousChar) || ctype_space($previousChar))) {
+                        break;
+                    }
+                }
+             * */
+            int can_enter = 1;
+
+//            int start_position = position - strlen(match.patterns->ptext.astring);
+//            int start_position = 0;
+            int start_position = position - strlen( current->matched->ptext.astring);
+
+//            printf("match.patterns->ptext.astring=%s\n", current->matched->ptext.astring);
+//            int  start_position = position - current->trie->text->length;
+            if(start_position > 0) {
+                char prev_char = text->astring[start_position - 1];
+//                char next_char = text->astring[position + 1];
+                printf("前一位prev_char = %c, isalpha(prev_char) = %d, start_position = %d, position = %zu \n", prev_char, isalpha(prev_char), start_position, position);
+//                printf("后一位next_char = %c, isalpha(next_char) = %d, start_position = %d \n", next_char, isalpha(next_char), start_position);
+                if(isalpha(prev_char)) {
+                    can_enter = 0;
+                }
+            }
+
+            if(can_enter) {
+                if(position < strlen(text->astring)) {
+//                    char prev_char = text->astring[start_position - 1];
+                    char next_char = text->astring[position];
+//                    printf("前一位prev_char = %c, isalpha(prev_char) = %d, start_position = %d \n", prev_char, isalpha(prev_char), start_position);
+                    printf("后一位next_char = %c, isalpha(next_char) = %d, start_position = %d, position = %zu \n", next_char, isalpha(next_char), start_position, position);
+                    if(isalpha(next_char)) {
+                        can_enter = 0;
+                    }
+                }
+            }
+
+//            printf("can_enter=%d, position=%zu, length = %s\n", can_enter, position, current->trie->text->astring);
+            printf("can_enter=%d, position=%zu\n", can_enter, position);
+
+            /* Found a match! */
+            match.position = position + thiz->base_position;
+            match.size = current->matched_size;
+            match.patterns = current->matched;
+
+            printf("match.position=%zu\n", match.position);
+            printf("match.size=%zu\n", match.size);
+            printf("match.patterns->ptext.astring = %s, match.patterns->rtext.astring = %s, strlen(match.patterns->ptext.astring) = %lu, start_position = %hhd\n",
+                   match.patterns->ptext.astring, match.patterns->rtext.astring, strlen(match.patterns->ptext.astring), start_position);
+
+
+
             /* Do call-back */
-            if (callback(&match, user))
+            if (can_enter && callback(&match, user))
             {
                 if (thiz->wm == AC_WORKING_MODE_FINDNEXT) {
                     thiz->position = position;
